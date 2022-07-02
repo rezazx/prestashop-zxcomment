@@ -1,0 +1,11 @@
+.icon-AdminZxCommentTab::before{
+    content: "\f075";
+}
+#subtab-AdminZxCommentTab i{
+    width: 19px;
+    overflow: hidden;
+}
+#subtab-AdminZxCommentTab i::after{
+    content: "comment" !important;
+    color: #fff;
+}

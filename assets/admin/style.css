@@ -1,0 +1,101 @@
+.zxCommentAdmin .commentList tr td.actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: max-content;
+    max-width: 100px;
+    overflow: visible;
+}
+.zxCommentAdmin .commentList tr{
+    cursor: pointer;
+}
+.zxCommentAdmin .commentList tr.new,.zxCommentAdmin .commentList tr.new td{
+    background: #ffd;
+}
+.zxCommentAdmin .commentList tr:hover,.zxCommentAdmin .commentList tr td:hover{
+    background-color: #f4f8fb !important;
+}
+.zxCommentAdmin .commentList span.action{
+    background: #eee;
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10px;
+    text-align: right !important;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+
+}
+.zxCommentAdmin .commentList span.action:hover{
+    background: #aee;
+}
+.zxCommentAdmin .commentList span.accept{color: #22cc44;}
+.zxCommentAdmin .commentList span.reject{color: #cc9944;}
+.zxCommentAdmin .commentList span.delete{color: #ee4422;}
+
+.zxCommentAdmin .commentList tr td ,.zxCommentAdmin .commentList tr th{
+    padding: 10px 4px !important;
+    max-width: 80px;
+    overflow: hidden;
+}
+.zxCommentAdmin .commentList tr td.prname ,.zxCommentAdmin .commentList tr th.prname{
+    max-width: 130px;
+}
+.zxCommentAdmin .commentList tr td.comment ,.zxCommentAdmin .commentList tr th.comment{
+    max-width: 250px;
+}
+.zxCommentAdmin .commentList .ltr{
+    direction: ltr;
+    text-align: right;
+}
+
+.zxCommentAdmin .commentTypes{
+    width: 50%;
+    display: flex;
+    float: left;
+    justify-content: end;
+    padding: 0 10px;
+}
+.zxCommentAdmin .commentTypes a{
+    display: flex;
+    width: max-content;
+    padding: 0 5px;
+    background: #eee;
+    margin: 0 5px;
+    color: #226699;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.zxCommentAdmin .commentTypes a.current{
+    background: #2fb;
+    color: #000;
+}
+.zxCommentAdmin .panel-heading{
+    padding: 10px 5px !important;
+    height: max-content !important;
+}
+#maintab-AdminZxCommentTab a{
+    border-left: 3px solid #fff !important;
+    background-color: #282b30 !important;
+    color: #fff !important;
+}
+#maintab-AdminZxCommentTab  a.title i{
+    color: #fff !important;
+}
+#nav-sidebar ul.menu li.maintab.active a.title{
+    background: none;
+    border: none;
+}
+#nav-sidebar ul.menu li.maintab.active a,#nav-sidebar ul.menu li.maintab > a.title i{
+    color: #BEBEBE;
+}
+
+.zxCommentAdminSingle .comment{
+    display: flex;
+    font-size: 12pt;
+    flex-direction: column;
+}

@@ -1,0 +1,128 @@
+/**
+ * ZXCOMMENT MODULE
+ * 
+ * @version 1.0.1
+ * @author Reza.Ahmadi : Reza.zx@live.com
+ * @copyright 2016-2022 MRZX.ir
+ * @link https://MRZX.ir
+ * 
+ */
+
+.zxCommentContainer{
+    margin: 10px 0;
+}
+.zxCommentContainer .zxc_commnetForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.zxCommentContainer .row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.zxCommentContainer .blocktitle{padding: 10px 0;}
+.zxc_commnetForm input:not(input[type=submit]),
+.zxc_commnetForm textarea
+{
+    border: 1px solid #e1e1e1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    resize: none;
+}
+.zxc_commnetForm input[type=submit]{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.zxc_message p{font-size: 14pt;}
+.zxc_message small{
+    font-size: 11pt;
+    display: flex;
+    font-weight: 300;
+}
+.zxc_message .error{
+    color: #f00;
+}
+.zxc_message .success{
+    color: #0ecc00;
+}
+
+.zxc_comments{
+    display: flex;
+    flex-direction: column;
+}
+
+.zxc_comments .zxc_comment{
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e1e1e1;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+.zxc_comment .zxc_info{
+    display: flex;
+    align-items: center;
+}
+
+.zxc_info .zxc_name{
+    font-size: 13pt;
+    font-weight: 600;
+}
+
+.zxc_info .zxc_date{
+    font-size: 10pt;
+    margin: 0 15px;
+}
+
+.zxc_comment .zxc_content{
+    margin-top: 10px;
+}
+
+.zxc_stars{
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.zxc_commnetForm .startext{margin-left: 10px;}
+.zxc_stars .star{
+    background: url(./star.svg) no-repeat;
+    width: 35px;
+    height: 35px;
+    background-size: 90%;
+    padding: 2px;
+}
+.zxc_stars .star.fill{
+    background-image: url(./star-fill.svg);
+}
+.zxc_comment .zxc_info .star{
+    width: 20px;
+    height: 20px;
+}
+.zxc_commnetForm .star{
+    cursor: pointer;
+}
+
+@media screen and (max-width:768px) {
+    .zxc_comment .zxc_info{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .zxc_info .zxc_name {
+        width: 100%;
+    }
+    .zxc_info .zxc_date {
+        margin: 0;
+        width: 50%;
+      }
+    .zxc_info .zxc_grade{
+        width: 50%;
+    }
+}
