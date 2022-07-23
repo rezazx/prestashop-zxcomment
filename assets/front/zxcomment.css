@@ -1,7 +1,7 @@
 /**
  * ZXCOMMENT MODULE
  * 
- * @version 1.0.1
+ * @version 1.1.0
  * @author Reza.Ahmadi : Reza.zx@live.com
  * @copyright 2016-2022 MRZX.ir
  * @link https://MRZX.ir
@@ -10,6 +10,10 @@
 
 .zxCommentContainer{
     margin: 10px 0;
+    box-sizing: border-box;
+}
+.zxCommentContainer *,.zxCommentContainer *::before,.zxCommentContainer *::after{
+    box-sizing: border-box;
 }
 .zxCommentContainer .zxc_commnetForm{
     display: flex;
@@ -44,6 +48,7 @@
     font-size: 11pt;
     display: flex;
     font-weight: 300;
+    line-height: 1.6em;
 }
 .zxc_message .error{
     color: #f00;
@@ -109,6 +114,71 @@
     cursor: pointer;
 }
 
+.zxBComments {
+    display: flex;
+    width: 1200px;
+    justify-content: center;
+    padding: 40px 20px;
+    max-width: 100%;
+    flex-wrap: wrap;
+    margin: auto;
+    direction: rtl;
+    flex-direction: row-reverse;
+    font-size: 12pt;
+    font-weight: normal;
+}
+.zxBComments > header{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    position: relative !important;
+    align-items: flex-start;
+}
+.zxBComments > header > a{
+    position: absolute;
+    left: 77px;
+    top: 30px;
+}
+.zxBComments > header > a img{
+    width: 160px;
+}
+.zxBComments > form{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+}
+.zxBComments > header img{
+    max-width: 100%;
+
+}
+
+.zxc_commnetForm input[type=submit]{
+    background: #782776;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.zxCommentBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    font-size: 13pt;
+}
+@media screen and (max-width:1000px) {
+    .zxBComments > header > a {
+        position: absolute;
+        left: 25px;
+        top: 15px;
+      }
+}
 @media screen and (max-width:768px) {
     .zxc_comment .zxc_info{
         display: flex;
@@ -124,5 +194,25 @@
       }
     .zxc_info .zxc_grade{
         width: 50%;
+    }
+    .zxBComments{
+        padding: 0;
+    }
+    .zxBComments > header{
+        width: 85%;
+    }
+    
+    .zxBComments > form{
+        width: 100%;
+    }
+
+    .zxBComments > header > a {
+        position: absolute;
+        left: 15px;
+        top: 12px;
+    }
+    .zxBComments > header > a img {
+        width: auto;
+        max-width: 90px;
     }
 }

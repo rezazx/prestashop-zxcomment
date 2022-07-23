@@ -17,14 +17,25 @@ class AdminZxCommentAjaxController extends ModuleAdminController
     {
         $v=strtolower(strval(Tools::getValue('action_name')));
         $c_id=intval(Tools::getValue('id_comment'));
+        $tbl=strtolower(strval(Tools::getValue('table_name')));
 
         $r=false;
-        if($v==='accept')
-            $r=ZxComment::setValidate($c_id,1);
-        elseif($v==='reject')
-            $r=ZxComment::setValidate($c_id,-1);
-        elseif($v==='delete')
-            $r=ZxComment::deleteComment($c_id);
+        if($tbl=="pcomment"){
+            if($v==='accept')
+                $r=ZxComment::setValidate($c_id,1);
+            elseif($v==='reject')
+                $r=ZxComment::setValidate($c_id,-1);
+            elseif($v==='delete')
+                $r=ZxComment::deleteComment($c_id);
+        }
+        else if($tbl=="bcomment"){
+            if($v==='accept')
+                $r=ZxComment::setBCValidate($c_id,1);
+            elseif($v==='reject')
+                $r=ZxComment::setBCValidate($c_id,-1);
+            elseif($v==='delete')
+                $r=ZxComment::deleteBComment($c_id);
+        }
         
         if(empty($r))
     		die(Tools::jsonEncode(array('error' => 'خطا در انجام عملیات')) );

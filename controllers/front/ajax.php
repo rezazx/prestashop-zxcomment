@@ -73,7 +73,7 @@ class ZxCommentAjaxModuleFrontController extends ModuleFrontController
 
         $content=Tools::substr(strval(Tools::getValue('zxc_content')),0,400);
         if( Tools::strlen($content)<5)
-            $errors[]='طول دیدگاه باید بیشتر از 5 حرف باشد.';
+            $errors[]='طول پیام باید بیشتر از 5 حرف باشد.';
 
         $grade=intval(Tools::getValue('zxc_grade'));
         if(!($grade>0 && $grade<=5))
@@ -116,6 +116,80 @@ class ZxCommentAjaxModuleFrontController extends ModuleFrontController
         )));
     }
 
+    public function ajaxSubmitBComment()
+    {
+        $sFormKey = $this->context->cookie->zxbCommentFormKey;
+
+        if(Configuration::get('zxbCommentEnable')!=1)
+            die(Tools::jsonEncode(array(
+                'hasError'=>true,
+                'errors'=>'دیدگاه ها غیر فعال هستند.'
+            )));
+        
+        if(Configuration::get('zxbCommentGuest')!=1 && !$this->context->customer->isLogged())
+            die(Tools::jsonEncode(array(
+                'hasError'=>true,
+                'errors'=>'کاربر مهمان نمیتواند نظر بدهد.'
+            )));
+
+        $errors=array();
+
+        $c_name=strval(Tools::getValue('c_name'));
+        if(strlen($c_name)<3)
+            $errors[]='نام و نام خانوادگی را بدرستی وارد کنید.';
+        
+        $c_email=strval(Tools::getValue('c_email'));
+        $c_phone=strval(Tools::getValue('c_phone'));
+        if( !Validate::isEmail($c_email) && !$this->isMobilePhone($c_phone))
+            $errors[]='وارد کردن تلفن همراه یا ایمیل الزامی می باشد.';
+
+        if(!empty($c_phone) && !$this->isMobilePhone($c_phone))
+            $errors[]='تلفن همراه وارد شده معتبر نمی باشد.';
+        
+        if(!empty($c_email) && !Validate::isEmail($c_email))
+            $errors[]='ایمیل وارد شده معتبر نمی باشد.';
+
+        $content=Tools::substr(strval(Tools::getValue('c_content')),0,400);
+        if( Tools::strlen($content)<5)
+            $errors[]='طول دیدگاه باید بیشتر از 5 حرف باشد.';
+        
+        if($sFormKey != Tools::getValue('formKey') || empty($sFormKey))
+            $errors[]='فرم نامعتبر است، صفحه را رفرش کنید.';
+        
+        $title='';
+        if(Configuration::get('zxbCommentTitleEnable')){
+            $title=Tools::substr(strval(Tools::getValue('zxc_title')),0,48);
+        }
+        
+        $id_customer=(int)$this->context->cookie->id_customer;
+        $validate=0;
+        if(Configuration::get('zxbCommentAutoAccept')==1)
+            $validate=1;
+
+        if(!empty($errors)){
+            die(Tools::jsonEncode(array(
+                'hasError'=>true,
+                'errors'=>$errors
+            )));
+        }
+        
+        if(ZxComment::insertBComment($c_name,$c_email,$c_phone,$content,$title,$id_customer,$validate))
+        {
+            $formKey = md5(uniqid(microtime(), true));
+            $this->context->cookie->__set('zxbCommentFormKey', $formKey);
+            die(Tools::jsonEncode(array(
+                'hasError'=>false,
+                'message'=>'با موفقیت ثبت شد.',
+                'validate'=>$validate
+            )));
+        }
+        
+        die(Tools::jsonEncode(array(
+            'hasError'=>true,
+            'errors'=>'خطای نا مشخص',
+        )));
+    }
+
     /**
      * Start forms process
      * @see FrontController::postProcess()
@@ -130,6 +204,10 @@ class ZxCommentAjaxModuleFrontController extends ModuleFrontController
 
         if (Tools::isSubmit('zxc_submitComment')) {
             $this->ajaxSubmitComment();
+        }
+
+        if (Tools::isSubmit('zxc_submitBuyerComment')) {
+            $this->ajaxSubmitBComment();
         }
 
         die(Tools::jsonEncode(array(

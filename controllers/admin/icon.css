@@ -1,11 +1,11 @@
 .icon-AdminZxCommentTab::before{
     content: "\f075";
 }
-#subtab-AdminZxCommentTab i{
+#subtab-AdminZxCommentTab i:not(.sub-tabs-arrow){
     width: 19px;
     overflow: hidden;
 }
-#subtab-AdminZxCommentTab i::after{
+#subtab-AdminZxCommentTab i:not(.sub-tabs-arrow)::after{
     content: "comment" !important;
     color: #fff;
 }

@@ -1,7 +1,7 @@
 /**
  * ZXCOMMENT MODULE
  * 
- * @version 1.0.1
+ * @version 1.1.0
  * @author Reza.Ahmadi : Reza.zx@live.com
  * @copyright 2016-2022 MRZX.ir
  * @link https://MRZX.ir
@@ -15,7 +15,7 @@
     function QQ(t){
         return document.querySelector(t);
     }
-    if(typeof(Q('#zxCommentContainer'))!=='object')
+    if(!QQ('.zxCommentContainer'))
         return;
 
     
@@ -73,39 +73,84 @@
         });
     });
 
-    QQ('#zxc_commnetForm').addEventListener('submit',function (e){
-        e.preventDefault();
-        const form = e.currentTarget;
-        let url=this.getAttribute('action').trim();
-        const data=new FormData(form);
+    if(QQ('#zxc_commnetForm'))
+        QQ('#zxc_commnetForm').addEventListener('submit',function (e){
+            e.preventDefault();
+            const form = e.currentTarget;
+            let url=this.getAttribute('action').trim();
+            const data=new FormData(form);
 
-        fetchData(data,url).then(r=>{
-            if(r.hasError)
-            {
-                let t='';
-                if(typeof(r.errors)=='object')
-                    for(let i in r.errors)
-                    {
-                        t +=r.errors[i] +'<br>'
-                    }
-                else
-                    t =r.errors;
+            fetchData(data,url).then(r=>{
+                if(r.hasError)
+                {
+                    let t='';
+                    if(typeof(r.errors)=='object')
+                        for(let i in r.errors)
+                        {
+                            t +=r.errors[i] +'<br>'
+                        }
+                    else
+                        t =r.errors;
 
-                showMessage('خطا در ثبت دیدگاه !',t,'error');
-            }
-            else{
+                    showMessage('خطا در ثبت دیدگاه !',t,'error');
+                }
+                else{
 
-                if(r.validate==1)
-                    showMessage('با تشکر از ثبت دیدگاه .','دیدگاه شما تایید شد!','success');
-                else
-                    showMessage('با تشکر از ثبت دیدگاه .',
-                    'پس از بررسی، دیدگاه شما در سایت نمایش داده می شود',
-                    'success');
-                
-                QQ('#zxc_commnetForm').reset();
-            }
+                    if(r.validate==1)
+                        showMessage('با تشکر از ثبت دیدگاه .','دیدگاه شما تایید شد!','success');
+                    else
+                        showMessage('با تشکر از ثبت دیدگاه .',
+                        'پس از بررسی، دیدگاه شما در سایت نمایش داده می شود',
+                        'success');
+                    
+                    QQ('#zxc_commnetForm').reset();
+                }
+            });
+            
         });
-        
-    });
 
+    if(QQ('#zxc_bcommnetForm'))
+        QQ('#zxc_bcommnetForm').addEventListener('submit',function (e){
+            e.preventDefault();
+            const form = e.currentTarget;
+            let url=this.getAttribute('action').trim();
+            const data=new FormData(form);
+
+            fetchData(data,url).then(r=>{
+                if(r.hasError)
+                {
+                    let t='';
+                    if(typeof(r.errors)=='object')
+                        for(let i in r.errors)
+                        {
+                            t +=r.errors[i] +'<br>'
+                        }
+                    else
+                        t =r.errors;
+
+                    showMessage('خطا در ثبت دیدگاه !',t,'error');
+                }
+                else{
+
+                    if(r.validate==1)
+                        showMessage('<i class="icon-tick"></i> پیام شما با موفقیت دریافت شد.'
+                        ,' ','success');
+                    else
+                        showMessage('<i class="icon-tick"></i> پیام شما با موفقیت دریافت شد.',
+                        ' ',
+                        'success');
+                    
+                    QQ('#zxc_bcommnetForm').reset();
+
+                    setTimeout(function(){
+                        if(typeof(shopUrl)=='string')
+                            window.location.href = shopUrl;
+                        else
+                            window.location.href = baseUri
+                    },3000);
+                }
+            });
+            
+        });
+    console.log('END');
  }, false);
